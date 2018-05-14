@@ -14,12 +14,13 @@ public class CopyFilesCamel {
 				@Override
 				public void configure() throws Exception {
 					from("file:data/input?noop=true")
-					.to("file:data/output"); // будет создана, если не существует
+							.to("log:?level=INFO&showBody=true&showHeaders=true")
+							.to("file:data/output"); // будет создана, если не существует
 				}
 			});
 			
 			camelContext.start();
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 			camelContext.stop();
 			
 		} catch (Exception e) {
